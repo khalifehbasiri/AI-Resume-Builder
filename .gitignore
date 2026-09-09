@@ -1,0 +1,19 @@
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+tmp/
+career-data/
+output/
+*.inspect.ndjson
+# Local source originals and working exports are retained on disk.
+Headless Headhunter Docuemtation/
+Headless Headhunter Videos/
+sheet_gid_*.csv
+build_videos_guide.mjs
+# Optional third-party source catalogs stay outside the distributed skill.
+.agents/skills/headhunter-resume/references/catalog.json
+*.bundle

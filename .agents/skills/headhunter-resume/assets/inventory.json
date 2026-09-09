@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "candidate_id": "",
+  "target": {"mode": "scratch", "role": "", "seniority": "", "market": ""},
+  "sources": [],
+  "experiences": [],
+  "claims": [],
+  "requirements": [],
+  "open_questions": [],
+  "notes": []
+}

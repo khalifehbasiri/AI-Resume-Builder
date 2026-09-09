@@ -1,0 +1,4 @@
+interface:
+  display_name: "Headhunter Resume"
+  short_description: "Interview candidates and build evidence-based resumes"
+  default_prompt: "Use $headhunter-resume to interview me and build a resume using my existing resume, LinkedIn, GitHub, portfolio, and target role."
