@@ -1,4 +1,4 @@
-"""Install an independent copy of the skill; refuse to overwrite an existing install."""
+"""Copy the Agent Skills package to a chosen skills directory without overwriting."""
 
 import argparse
 import shutil
@@ -19,7 +19,7 @@ def install(destination):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--destination", type=Path, default=Path.home() / ".agents" / "skills", help="Parent skills directory; default ~/.agents/skills")
+    parser.add_argument("--destination", type=Path, default=Path.home() / ".agents" / "skills", help="Parent directory used by your agent host; default ~/.agents/skills")
     args = parser.parse_args()
     try:
         print(f"Installed: {install(args.destination)}")

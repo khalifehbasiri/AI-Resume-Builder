@@ -4,7 +4,7 @@ This is a deliberately simplified, authored example of the intended interaction,
 
 ## Starting point
 
-**Candidate:** Use $headhunter-resume to build a resume for junior backend roles. I made a Python search tool for a class. My teammate deployed it, and I don't have metrics.
+**Candidate:** Follow the Headhunter Resume instructions and build a resume for junior backend roles. I made a Python search tool for a class. My teammate deployed it, and I don't have metrics.
 
 **Coach:** What did the tool search, which parts did you personally build, and who was it intended for?
 

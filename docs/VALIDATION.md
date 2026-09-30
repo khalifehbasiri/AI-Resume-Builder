@@ -1,12 +1,13 @@
 # Validation record
 
-Local verification performed on Windows with Python 3.11 on 2026-09-09.
+Latest local verification performed on Windows with Python 3.11 on 2026-09-30.
 
 ## Automated checks
 
-- 21 unittest cases cover inventory references, duplicate IDs, incomplete intake, date validation, malformed input, uncertain ownership, unsupported draft claims, CLI exit codes, optional local catalog search, hyperlink recovery, and portable installation, including paths with spaces.
+- 23 unittest cases cover inventory references, duplicate IDs, incomplete intake, date validation, malformed input, uncertain ownership, unsupported draft claims, CLI exit codes, optional local catalog search, hyperlink recovery, portable skill installation, and deterministic single-file prompt generation.
 - The OpenAI skill-creator `quick_validate.py` validator passed for the completed skill.
-- `scripts/validate_package.py` verifies local Markdown links, required release resources, and portability of paths. It rejects a copied catalog inside the distributed skill.
+- `scripts/build_portable_prompt.py --check` confirms that the committed provider-neutral prompt matches every canonical instruction resource and the empty inventory template.
+- `scripts/validate_package.py` verifies local Markdown links, required release resources, prompt freshness, and portability of paths. It rejects a copied catalog inside the distributed skill.
 - An installation into a temporary directory successfully runs evidence validation from outside the repository. A second installation is refused without overwriting the first.
 - Public-release tests use synthetic catalog data. No third-party catalog is shipped; the search helper requires an explicit local `--catalog` path. Initial private research indexed 1,140 role/episode entries and 132 qualification profiles, with 991 recovered links; those source records are not part of the public package.
 
@@ -31,6 +32,8 @@ Feedback also led to narrower follow-up handling and explicit guidance not to re
 
 These checks establish observed behavior and working helpers; they do not prove perfect behavior in every future conversation. The Python audit is structural. It cannot determine that prose is true, that a source is authentic, or that every resume statement appears in the draft manifest. Semantic evidence checking remains the agent's responsibility and candidate review remains valuable.
 
-Only the documented caption segments from two videos were inspected; catalog indexing is not full-channel content review. Live LinkedIn/GitHub authentication and DOCX/PDF export depend on the user's Codex tools and were not exercised using a real candidate account. The reusable instructions support those workflows without bundling connectors or document renderers.
+Only the documented caption segments from two videos were inspected; catalog indexing is not full-channel content review. Live LinkedIn/GitHub authentication and DOCX/PDF export depend on tools supplied by the chosen AI host and were not exercised using a real candidate account. The reusable instructions support those workflows without bundling connectors or document renderers.
+
+The universal prompt is structurally verified, but it cannot make every model equally capable. Instruction adherence, context capacity, attachment support, tool access, and output quality still depend on the selected model and host application.
 
 The GitHub Actions workflow runs the same automated suite on Windows and Ubuntu with Python 3.10 and 3.13. Its run status is the authority for hosted CI results, which can be inspected in the repository's Actions tab.

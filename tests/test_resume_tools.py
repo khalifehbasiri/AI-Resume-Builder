@@ -21,6 +21,7 @@ def module(name, path):
 helpers = module("resume_tools", SKILL / "scripts/resume_tools.py")
 builder = module("build_catalog", ROOT / "scripts/build_catalog.py")
 installer = module("install_skill", ROOT / "scripts/install_skill.py")
+prompt_builder = module("build_portable_prompt", ROOT / "scripts/build_portable_prompt.py")
 
 
 def inventory():
@@ -200,6 +201,18 @@ class InstallTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertTrue((dest / "headhunter-resume/SKILL.md").is_file())
             self.assertEqual(subprocess.run(cmd, capture_output=True).returncode, 1)
+
+
+class PortablePromptTests(unittest.TestCase):
+    def test_prompt_contains_every_canonical_resource(self):
+        rendered = prompt_builder.render()
+        self.assertIn("vendor-neutral edition", rendered)
+        self.assertIn("If persistent files are unavailable", rendered)
+        for _, path in prompt_builder.RESOURCES:
+            self.assertIn(path.read_text(encoding="utf-8").strip(), rendered)
+
+    def test_committed_prompt_is_current(self):
+        self.assertEqual(prompt_builder.DEFAULT_OUTPUT.read_text(encoding="utf-8"), prompt_builder.render())
 
 
 if __name__ == "__main__":

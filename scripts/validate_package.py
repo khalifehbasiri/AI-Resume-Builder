@@ -1,11 +1,19 @@
 """Validate portable skill resources and local Markdown links without dependencies."""
 
 import json
+import importlib.util
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / ".agents/skills/headhunter-resume"
+
+
+def load_module(path):
+    spec = importlib.util.spec_from_file_location("build_portable_prompt", path)
+    result = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(result)
+    return result
 
 
 def main():
@@ -20,9 +28,14 @@ def main():
                 continue
             if not (path.parent / dest.split("#")[0]).exists():
                 errors.append(f"Broken local link: {path.relative_to(ROOT)} -> {dest}")
-    for name in ("LICENSE", "README.md", "CONTRIBUTING.md", ".agents/skills/headhunter-resume/agents/openai.yaml", ".agents/skills/headhunter-resume/assets/inventory.json"):
+    for name in ("LICENSE", "README.md", "CONTRIBUTING.md", "portable/headhunter-resume-prompt.md", ".agents/skills/headhunter-resume/agents/openai.yaml", ".agents/skills/headhunter-resume/assets/inventory.json"):
         if not (ROOT / name).is_file():
             errors.append(f"Required release file missing: {name}")
+    prompt_path = ROOT / "portable/headhunter-resume-prompt.md"
+    if prompt_path.is_file():
+        builder = load_module(ROOT / "scripts/build_portable_prompt.py")
+        if prompt_path.read_text(encoding="utf-8") != builder.render():
+            errors.append("Portable prompt is stale; run scripts/build_portable_prompt.py")
     if (SKILL / "references/catalog.json").exists():
         errors.append("Third-party catalog must not be bundled in the public skill")
     if not (SKILL / "LICENSE").is_file() or (SKILL / "LICENSE").read_text(encoding="utf-8") != (ROOT / "LICENSE").read_text(encoding="utf-8"):
@@ -32,7 +45,7 @@ def main():
             content = path.read_text(encoding="utf-8")
             if "C:\\Users\\" in content or "C:/Users/" in content:
                 errors.append(f"Nonportable local path: {path.relative_to(ROOT)}")
-    result = {"ok": not errors, "errors": errors, "markdown_files_checked": len(markdown_files), "catalog_bundled": False}
+    result = {"ok": not errors, "errors": errors, "markdown_files_checked": len(markdown_files), "portable_prompt_current": prompt_path.is_file() and not any("Portable prompt" in error for error in errors), "catalog_bundled": False}
     print(json.dumps(result, indent=2))
     return 1 if errors else 0
 

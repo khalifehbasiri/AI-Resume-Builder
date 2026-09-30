@@ -2,7 +2,18 @@
 
 ## Layout
 
-`.agents/skills/headhunter-resume` is the portable installable directory. `SKILL.md` contains the workflow and routes to focused references; `assets/inventory.json` is an empty starting template; `scripts/resume_tools.py` provides deterministic offline checks. Repository-level scripts build the source catalog, validate the package, and install a copy. Tests use synthetic data only.
+`.agents/skills/headhunter-resume` is the canonical Agent Skills package. `SKILL.md` contains the workflow and routes to focused references; `assets/inventory.json` is an empty starting template; `scripts/resume_tools.py` provides deterministic offline checks. `portable/headhunter-resume-prompt.md` is the generated, single-file provider-neutral edition. Repository-level scripts build that prompt, build an optional source catalog, validate the package, and install a skill copy. Tests use synthetic data only.
+
+## Rebuild the portable prompt
+
+Do not hand-edit `portable/headhunter-resume-prompt.md`. It is assembled from the canonical skill instructions, references, and empty inventory template:
+
+```sh
+python scripts/build_portable_prompt.py
+python scripts/build_portable_prompt.py --check
+```
+
+The prompt deliberately excludes executable Python source and OpenAI-specific UI metadata. Its compatibility preamble explains how to fall back when an AI host lacks files, browsing, code execution, or rendering. The test suite and package validator fail when the committed prompt is stale.
 
 ## Optional private source catalog
 
@@ -34,8 +45,8 @@ The optional built-in skill-creator validator checks skill frontmatter and unfin
 
 ## Update an installed copy
 
-Keep edits in the repository source of truth. The installer intentionally refuses to overwrite an existing copy. Compare the existing installed folder with the updated skill, preserve any local edits, and replace it deliberately after review. Alternatively, use the repository copy directly in Codex. Do not install two identical skills into the same discovery scope.
+Keep edits in the repository source of truth. The installer intentionally refuses to overwrite an existing copy. Compare the existing installed folder with the updated skill, preserve any local edits, and replace it deliberately after review. Alternatively, use the repository copy directly in a compatible agent host. Do not install two identical skills into the same discovery scope. For products without folder-based skill discovery, use the generated portable prompt instead of inventing a product-specific directory.
 
 ## Before pushing
 
-Review the staged file list. Keep candidate data, copied source catalogs, raw captions, original third-party guides, tokens, temporary downloads, and runtime dependencies excluded. This is a public repository: check the full history of any branches you publish, not only their current files. The MIT License applies to original project material, not linked third-party sources.
+Rebuild the portable prompt, then review the staged file list. Keep candidate data, copied source catalogs, raw captions, original third-party guides, tokens, temporary downloads, and runtime dependencies excluded. This is a public repository: check the full history of any branches you publish, not only their current files. The MIT License applies to original project material, not linked third-party sources.

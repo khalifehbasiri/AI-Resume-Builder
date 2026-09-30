@@ -12,8 +12,8 @@ For interview or writing problems, include a short synthetic candidate prompt th
 
 1. Fork the repository and work on a branch.
 2. Keep changes focused. Preserve user intent, truthful attribution, and the ability to say "unknown".
-3. Add a regression test when changing helper behavior. For instruction changes, include a realistic synthetic scenario and the observed result.
-4. Run `python -m unittest discover -s tests -v` and `python scripts/validate_package.py`.
+3. Add a regression test when changing helper behavior. For instruction changes, include a realistic synthetic scenario and the observed result, then run `python scripts/build_portable_prompt.py` to regenerate the universal prompt.
+4. Run `python -m unittest discover -s tests -v`, `python scripts/build_portable_prompt.py --check`, and `python scripts/validate_package.py`.
 5. Open a pull request explaining the problem, resulting behavior, and verification.
 
 Use focused, descriptive commits and do not rewrite published `main` history. Keep generated files, candidate data, and source-research artifacts out of commits.
