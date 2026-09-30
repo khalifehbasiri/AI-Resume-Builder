@@ -90,6 +90,10 @@ The writing approach was informed by the supplied Headless Headhunter guide and 
 
 Source attribution, timestamps, and explicit adaptations are documented in [research notes](.agents/skills/headhunter-resume/references/research.md) and [methodology](.agents/skills/headhunter-resume/references/methodology.md). Original guides, transcripts, and copied source catalogs are not distributed. Optional local catalog import is described in [maintenance](docs/MAINTENANCE.md); it is not required to use the skill.
 
+### Repository history
+
+This public repository is the canonical project. It began on September 9, 2026, from a deliberately sanitized release snapshot after private source research. Earlier research commits are not part of the public Git history because they included a copied third-party catalog that is not licensed for redistribution. Subsequent development is preserved here as focused commits on `main`.
+
 ## Updates and troubleshooting
 
 - Skill missing: start a new turn or restart Codex; confirm the installed folder contains `SKILL.md` directly, not inside another nested folder.

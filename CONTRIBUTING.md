@@ -16,6 +16,8 @@ For interview or writing problems, include a short synthetic candidate prompt th
 4. Run `python -m unittest discover -s tests -v` and `python scripts/validate_package.py`.
 5. Open a pull request explaining the problem, resulting behavior, and verification.
 
+Use focused, descriptive commits and do not rewrite published `main` history. Keep generated files, candidate data, and source-research artifacts out of commits.
+
 Do not include copied guides, transcripts, qualification tables, or other third-party datasets without established redistribution rights. Keep optional imports under ignored local folders. New original contributions are submitted under this project's MIT License.
 
 AI-assisted contributions are welcome. Review generated changes, test them, and accurately describe what was verified. Avoid claims of universal ATS compatibility, guaranteed interviews, or perfect factual validation.
