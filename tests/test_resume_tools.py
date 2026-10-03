@@ -38,6 +38,113 @@ def inventory():
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_extended_bank_and_candidate_preferences(self):
+        data = inventory()
+        data["preferences"] = {"page_target": 1, "template": "existing", "required_experience_ids": ["e1"], "excluded_keywords": ["AWS"]}
+        data["experiences"][0].update(employer_group="employer-1", public_links=[
+            {"kind": "github", "label": "GitHub", "url": "https://github.com/example/project"},
+            {"kind": "demo", "label": "Live Demo", "url": "https://example.com/demo"},
+        ])
+        data["claims"][0].update(delivery_status="prototype", metric={
+            "kind": "outcome", "value": "seconds to minutes", "qualifier": "range",
+            "population": "File lookup workflow", "attribution": "Candidate confirmed",
+            "baseline": "hours", "outcome": "seconds to minutes", "window": None,
+        })
+        self.assertEqual(helpers.validate_inventory(data), [])
+
+    def test_preferences_reject_unknown_roles_and_invalid_page_target(self):
+        for prefs in (None, {"page_target": True}, {"page_target": 0}, {"page_target": "1"},
+                      {"required_experience_ids": ["missing"]}, {"excluded_keywords": [None]}, {"template": ""}):
+            with self.subTest(prefs=prefs):
+                data = inventory()
+                data["preferences"] = prefs
+                self.assertTrue(helpers.validate_inventory(data))
+
+    def test_public_links_reject_malformed_or_credential_urls(self):
+        for url in (None, "", "file:///private/project", "https://", "https://name:secret@example.com", "https://[broken"):
+            with self.subTest(url=url):
+                data = inventory()
+                data["experiences"][0]["public_links"] = [{"kind": "product", "label": "Product Site", "url": url}]
+                self.assertTrue(helpers.validate_inventory(data))
+
+    def test_optional_fields_reject_malformed_shapes(self):
+        for field, value in (("employer_group", []), ("public_links", {}), ("public_links", [None]),
+                             ("public_links", [{"kind": [], "label": "", "url": "https://example.com"}])):
+            data = inventory()
+            data["experiences"][0][field] = value
+            self.assertTrue(helpers.validate_inventory(data))
+        for field, value in (("delivery_status", []), ("metric", None), ("metric", {}), ("supersedes", [None])):
+            data = inventory()
+            data["claims"][0][field] = value
+            self.assertTrue(helpers.validate_inventory(data))
+
+    def test_metric_preserves_unknown_baseline_and_rejects_invalid_qualifier(self):
+        data = inventory()
+        metric = {"kind": "scope", "value": "100 TB+", "qualifier": "minimum", "population": "Searchable storage estate",
+                  "attribution": "Candidate confirmed", "baseline": None, "outcome": None, "window": None}
+        data["claims"][0]["metric"] = metric
+        self.assertEqual(helpers.validate_inventory(data), [])
+        for field, value in (("qualifier", "guess"), ("baseline", 12), ("attribution", []), ("kind", {})):
+            changed = copy.deepcopy(data)
+            changed["claims"][0]["metric"][field] = value
+            self.assertTrue(helpers.validate_inventory(changed))
+
+    def test_confirmed_correction_blocks_stale_claim_even_if_still_confirmed(self):
+        data = inventory()
+        data["requirements"] = []
+        correction = copy.deepcopy(data["claims"][0])
+        correction.update(id="c2", text="Corrected account of the same workflow.", supersedes=["c1"])
+        data["claims"].append(correction)
+        self.assertEqual(helpers.validate_inventory(data), [])
+        stale = helpers.audit_draft(data, {"claims": [{"text": "Old wording", "evidence_ids": ["c1"]}]})
+        self.assertTrue(any("superseded" in e for e in stale))
+        self.assertEqual(helpers.audit_draft(data, {"claims": [{"text": correction["text"], "evidence_ids": ["c2"]}]}), [])
+
+    def test_unconfirmed_correction_does_not_retire_confirmed_evidence(self):
+        data = inventory()
+        correction = copy.deepcopy(data["claims"][0])
+        correction.update(id="c2", status="unconfirmed", supersedes=["c1"])
+        data["claims"].append(correction)
+        self.assertEqual(helpers.audit_draft(data, {"claims": [{"text": "Original confirmed account", "evidence_ids": ["c1"]}]}), [])
+
+    def test_supported_requirement_cannot_use_superseded_evidence(self):
+        data = inventory()
+        correction = copy.deepcopy(data["claims"][0])
+        correction.update(id="c2", supersedes=["c1"])
+        data["claims"].append(correction)
+        self.assertTrue(helpers.validate_inventory(data))
+        data["requirements"][0]["claim_ids"] = ["c2"]
+        self.assertEqual(helpers.validate_inventory(data), [])
+
+    def test_correction_rejects_unknown_self_cycle_and_unrelated_experience(self):
+        for refs in (["missing"], ["c1"]):
+            data = inventory()
+            data["claims"][0]["supersedes"] = refs
+            self.assertTrue(helpers.validate_inventory(data))
+        data = inventory()
+        correction = copy.deepcopy(data["claims"][0])
+        correction.update(id="c2", supersedes=["c1"])
+        data["claims"].append(correction)
+        data["claims"][0]["supersedes"] = ["c2"]
+        self.assertTrue(any("cycle" in e for e in helpers.validate_inventory(data)))
+        data["claims"][0].pop("supersedes")
+        correction["experience_id"] = None
+        self.assertTrue(any("different experience" in e for e in helpers.validate_inventory(data)))
+
+    def test_audit_cli_blocks_confirmed_superseded_evidence(self):
+        data = inventory()
+        data["requirements"] = []
+        correction = copy.deepcopy(data["claims"][0])
+        correction.update(id="c2", supersedes=["c1"])
+        data["claims"].append(correction)
+        with tempfile.TemporaryDirectory() as folder:
+            inv_path, draft_path = Path(folder) / "inventory.json", Path(folder) / "draft.json"
+            inv_path.write_text(json.dumps(data), encoding="utf-8")
+            draft_path.write_text(json.dumps({"claims": [{"text": "Stale claim", "evidence_ids": ["c1"]}]}), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(SKILL / "scripts/resume_tools.py"), "audit", str(inv_path), str(draft_path)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1, result.stderr)
+            self.assertIn("superseded", result.stdout)
+
     def test_valid_inventory_and_draft(self):
         data = inventory()
         self.assertEqual(helpers.validate_inventory(data), [])
@@ -183,6 +290,9 @@ class InstallTests(unittest.TestCase):
             target = installer.install(Path(folder) / "skills")
             self.assertTrue((target / "SKILL.md").exists())
             self.assertTrue((target / "LICENSE").exists())
+            self.assertEqual((target / "assets/jakes-resume.tex").read_bytes(), (SKILL / "assets/jakes-resume.tex").read_bytes())
+            self.assertTrue((target / "assets/JAKES_TEMPLATE_LICENSE").is_file())
+            self.assertTrue((target / "assets/experience-bank.md").is_file())
             self.assertFalse((target / "references/catalog.json").exists())
             script = target / "scripts/resume_tools.py"
             path = Path(folder) / "inventory.json"

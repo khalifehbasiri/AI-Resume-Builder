@@ -2,6 +2,7 @@
   "schema_version": 1,
   "candidate_id": "",
   "target": {"mode": "scratch", "role": "", "seniority": "", "market": ""},
+  "preferences": {"page_target": 1, "template": "jakes", "required_experience_ids": [], "excluded_keywords": []},
   "sources": [],
   "experiences": [],
   "claims": [],

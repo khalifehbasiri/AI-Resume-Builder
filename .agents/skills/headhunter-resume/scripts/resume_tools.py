@@ -4,8 +4,10 @@ import argparse
 import json
 import re
 import sys
+from collections import deque
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlsplit
 
 def load_json(path):
     return json.loads(Path(path).read_text(encoding="utf-8-sig"))
@@ -13,6 +15,23 @@ def load_json(path):
 
 def nonempty(value):
     return isinstance(value, str) and bool(value.strip())
+
+
+def public_url(value):
+    if not nonempty(value):
+        return False
+    try:
+        parsed = urlsplit(value)
+        return parsed.scheme in ("http", "https") and bool(parsed.hostname) and parsed.username is None and parsed.password is None
+    except ValueError:
+        return False
+
+
+def superseded_claim_ids(data):
+    """Confirmed corrections with known ownership retire prior evidence IDs."""
+    return {ref for claim in data["claims"]
+            if claim["status"] == "confirmed" and claim["ownership"] != "unknown"
+            for ref in claim.get("supersedes", [])}
 
 
 def validate_inventory(data):
@@ -62,6 +81,20 @@ def validate_inventory(data):
                 errors.append(f"{context}.{field}: unknown reference {ref}")
         return refs
 
+    if "preferences" in data:
+        prefs = data["preferences"]
+        if not isinstance(prefs, dict):
+            errors.append("preferences must be an object")
+        else:
+            if "page_target" in prefs and (type(prefs["page_target"]) is not int or prefs["page_target"] < 1):
+                errors.append("preferences.page_target must be a positive integer")
+            if "template" in prefs:
+                require_text(prefs, "template", "preferences")
+            if "required_experience_ids" in prefs:
+                references(prefs, "required_experience_ids", tables["experiences"], "preferences")
+            if "excluded_keywords" in prefs and (not isinstance(prefs["excluded_keywords"], list) or not all(nonempty(k) for k in prefs["excluded_keywords"])):
+                errors.append("preferences.excluded_keywords must be an array of strings")
+
     for sid, source in tables["sources"].items():
         for field in ("kind", "locator", "accessed", "note"):
             require_text(source, field, sid)
@@ -85,7 +118,25 @@ def validate_inventory(data):
                 valid_dates = False
         if valid_dates and start and end and end != "present" and start > end:
             errors.append(f"{eid}: end precedes start")
+        if "employer_group" in experience and experience["employer_group"] is not None and not nonempty(experience["employer_group"]):
+            errors.append(f"{eid}.employer_group must be a nonempty string or null")
+        if "public_links" in experience:
+            links = experience["public_links"]
+            if not isinstance(links, list):
+                errors.append(f"{eid}.public_links must be an array")
+            else:
+                for index, link in enumerate(links):
+                    context = f"{eid}.public_links[{index}]"
+                    if not isinstance(link, dict):
+                        errors.append(f"{context} must be an object")
+                        continue
+                    if link.get("kind") not in ("github", "demo", "product", "other"):
+                        errors.append(f"{context}.kind is invalid")
+                    require_text(link, "label", context)
+                    if not public_url(link.get("url")):
+                        errors.append(f"{context}.url must be an HTTP(S) URL without embedded credentials")
 
+    correction_graph = {cid: [] for cid in tables["claims"]}
     for cid, claim in tables["claims"].items():
         require_text(claim, "text", cid)
         if claim.get("status") not in ("confirmed", "unconfirmed", "conflict", "rejected"):
@@ -102,6 +153,51 @@ def validate_inventory(data):
             require_text(claim, "confirmation", cid)
         if not isinstance(claim.get("keywords"), list) or not all(nonempty(k) for k in claim.get("keywords", [])):
             errors.append(f"{cid}.keywords must be an array of strings")
+        if "delivery_status" in claim and claim["delivery_status"] not in ("planned", "prototype", "implemented", "released", "production"):
+            errors.append(f"{cid}.delivery_status is invalid")
+        if "metric" in claim:
+            metric = claim["metric"]
+            if not isinstance(metric, dict):
+                errors.append(f"{cid}.metric must be an object")
+            else:
+                if metric.get("kind") not in ("scope", "outcome", "adoption"):
+                    errors.append(f"{cid}.metric.kind is invalid")
+                if metric.get("qualifier") not in ("exact", "approximate", "minimum", "range"):
+                    errors.append(f"{cid}.metric.qualifier is invalid")
+                for field in ("value", "population", "attribution"):
+                    require_text(metric, field, f"{cid}.metric")
+                for field in ("baseline", "outcome", "window"):
+                    if field not in metric or (metric[field] is not None and not nonempty(metric[field])):
+                        errors.append(f"{cid}.metric.{field} must be a nonempty string or null")
+        if "supersedes" in claim:
+            refs = references(claim, "supersedes", tables["claims"], cid)
+            correction_graph[cid] = [ref for ref in refs if ref in tables["claims"]]
+            if cid in refs:
+                errors.append(f"{cid}.supersedes cannot reference itself")
+            for ref in correction_graph[cid]:
+                if claim.get("experience_id") != tables["claims"][ref].get("experience_id"):
+                    errors.append(f"{cid}.supersedes: {ref} belongs to a different experience")
+
+    # Kahn's algorithm avoids recursion depth limits in a long correction history.
+    indegree = dict.fromkeys(correction_graph, 0)
+    for refs in correction_graph.values():
+        for ref in refs:
+            indegree[ref] += 1
+    ready = deque(cid for cid, degree in indegree.items() if degree == 0)
+    visited = 0
+    while ready:
+        cid = ready.popleft()
+        visited += 1
+        for ref in correction_graph[cid]:
+            indegree[ref] -= 1
+            if indegree[ref] == 0:
+                ready.append(ref)
+    if visited != len(correction_graph):
+        errors.append("Claim supersedes references contain a cycle")
+
+    superseded = {ref for cid, refs in correction_graph.items()
+                  if tables["claims"][cid].get("status") == "confirmed" and tables["claims"][cid].get("ownership") in ("personal", "team")
+                  for ref in refs}
 
     for rid, req in tables["requirements"].items():
         require_text(req, "text", rid)
@@ -112,7 +208,7 @@ def validate_inventory(data):
             errors.append(f"{rid}.assessment is invalid")
         refs = references(req, "claim_ids", tables["claims"], rid)
         if status == "supported":
-            if not refs or any(tables["claims"].get(ref, {}).get("status") != "confirmed" or tables["claims"].get(ref, {}).get("ownership") == "unknown" for ref in refs):
+            if not refs or any(ref in superseded or tables["claims"].get(ref, {}).get("status") != "confirmed" or tables["claims"].get(ref, {}).get("ownership") == "unknown" for ref in refs):
                 errors.append(f"{rid}: supported requirement needs confirmed claims with known ownership")
 
     for field in ("open_questions", "notes"):
@@ -128,6 +224,7 @@ def audit_draft(inventory, draft):
     if not isinstance(draft, dict) or not isinstance(draft.get("claims"), list) or not draft["claims"]:
         return ["Draft must contain a nonempty claims array"]
     claims = {c["id"]: c for c in inventory["claims"]}
+    superseded = superseded_claim_ids(inventory)
     for index, row in enumerate(draft["claims"]):
         if not isinstance(row, dict) or not nonempty(row.get("text")):
             errors.append(f"draft[{index}]: text is required")
@@ -142,6 +239,8 @@ def audit_draft(inventory, draft):
                 errors.append(f"draft[{index}]: unknown evidence {ref}")
             elif claim["status"] != "confirmed" or claim["ownership"] == "unknown":
                 errors.append(f"draft[{index}]: {ref} is not confirmed with known ownership")
+            elif ref in superseded:
+                errors.append(f"draft[{index}]: {ref} was superseded by a confirmed correction")
     return errors
 
 

@@ -1,6 +1,6 @@
 # Source record and video examples
 
-Reviewed on 2026-09-09. This skill uses the supplied written guide, templates, two videos' caption segments, the published episode tracker, and the qualifications table. It does **not** claim to have watched every indexed episode. Caption-based review is not visual review of the on-screen resumes, and automatic captions can contain errors.
+Initial Headless research reviewed on 2026-09-09; template and methodology additions reviewed on 2026-10-03. This skill uses supplied written guides/templates, two videos' caption segments, and links to the published episode tracker and qualifications table. It does **not** claim to have watched every indexed episode. Caption-based review is not visual review of the on-screen resumes, and automatic captions can contain errors.
 
 ## Written material inspected
 
@@ -31,3 +31,13 @@ Some CSV link cells contain display titles rather than URLs. The catalog builder
 Consult the original episode tracker or a user-supplied local catalog, choose a relevant accessible episode, and inspect actual captions or media using available tools. Cite the video and timestamp when a new observation changes advice. Do not derive content from the title alone. If captions/media are unavailable, use the written methodology and state the limitation; do not bypass membership access.
 
 The repository's documented `scripts/build_catalog.py` workflow can prepare a private local catalog from supplied snapshots. It is optional; the installed instructions and evidence audits work offline without it. Availability and market guidance may change after a snapshot.
+
+## Jake materials and iterative design additions
+
+On 2026-10-03 the supplied `Jakes-Resume.tex` was inspected in full. Its single-column sections, project headings, skills categories, and `glyphtounicode`/`pdfgentounicode` settings informed the adapted [template](../assets/jakes-resume.tex). The [upstream MIT License](https://github.com/jakegut/resume/blob/master/LICENSE), Copyright (c) 2020 Jake Gutierrez, was checked; the full notice is bundled separately and preserved in the template. This is an adaptation, not an untouched upstream copy.
+
+The supplied 67-page *Hired! The Only Resume Guide You'll Ever Need* PDF is branded Jake's Resume. Relevant text on one-page guidance, digital formats, ATS, presentation, skills, and work bullets was inspected; PDF pages 31-33 were also visually reviewed. It recommends familiar headings, supported job terms, clear formatting, action verbs, useful outcomes, and technical skills alongside experience. The full PDF is not bundled and its rights are not inferred from the LaTeX template's license. The guide and template are separate sources; their similar names do not establish common authorship.
+
+The [methodology decision table](methodology.md) records how their advice is reconciled with Headless Headhunter. Do not import guide claims of universal ATS-approved fonts, precise recruiter scanning times, hiring statistics, or fixed qualification thresholds as established facts.
+
+Iterative candidate review contributed original workflow additions: distinguish a primary application resume from an exhaustive bank; preserve substantive technical detail and required roles; separate timing improvements for different processes; accept explicit confirmations; retire corrected claims; show delivery and client collaboration; keep prototype/simulation status honest; select projects by relevance and contribution; include public code/demo destinations; and use consistent facts with shorter platform-specific copy. Personal employer names, required roles, technologies, and metrics are not universal rules or distributed candidate fixtures.

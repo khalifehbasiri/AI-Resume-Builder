@@ -28,7 +28,7 @@ def main():
                 continue
             if not (path.parent / dest.split("#")[0]).exists():
                 errors.append(f"Broken local link: {path.relative_to(ROOT)} -> {dest}")
-    for name in ("LICENSE", "README.md", "CONTRIBUTING.md", "portable/headhunter-resume-prompt.md", ".agents/skills/headhunter-resume/agents/openai.yaml", ".agents/skills/headhunter-resume/assets/inventory.json"):
+    for name in ("LICENSE", "README.md", "CONTRIBUTING.md", "portable/headhunter-resume-prompt.md", ".agents/skills/headhunter-resume/agents/openai.yaml", ".agents/skills/headhunter-resume/assets/inventory.json", ".agents/skills/headhunter-resume/assets/experience-bank.md", ".agents/skills/headhunter-resume/assets/jakes-resume.tex", ".agents/skills/headhunter-resume/assets/JAKES_TEMPLATE_LICENSE"):
         if not (ROOT / name).is_file():
             errors.append(f"Required release file missing: {name}")
     prompt_path = ROOT / "portable/headhunter-resume-prompt.md"
@@ -41,7 +41,7 @@ def main():
     if not (SKILL / "LICENSE").is_file() or (SKILL / "LICENSE").read_text(encoding="utf-8") != (ROOT / "LICENSE").read_text(encoding="utf-8"):
         errors.append("The standalone skill must include the project license")
     for path in SKILL.rglob("*"):
-        if path.is_file() and path.suffix in {".py", ".md", ".json", ".yaml"}:
+        if path.is_file() and path.suffix in {".py", ".md", ".json", ".yaml", ".tex"}:
             content = path.read_text(encoding="utf-8")
             if "C:\\Users\\" in content or "C:/Users/" in content:
                 errors.append(f"Nonportable local path: {path.relative_to(ROOT)}")

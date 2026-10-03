@@ -1,43 +1,69 @@
-# Qualification-first writing
+# Writing decisions and their reasons
 
-## Source-backed approach
+## How the sources are combined
 
-The local "How to Get a Job" guide (Resume guide 2.0), pages 7-12, starts from the target role's qualifications. Pages 21-25 describe an opening job summary and bullets linking what was done, how, and the reason/result. The reviewed videos add an explicit work/project context and emphasize ordinary business language. See [research.md](research.md) for timestamped sources.
+Use the candidate's request, truthful evidence, and the actual application requirements to resolve choices. Source guides inform the workflow; their preferences are not universal hiring facts. The inspected sources and limits are recorded in [research.md](research.md).
 
-Use the posting's qualifications to choose content, but retain relevant responsibilities and domain context when they explain the work. Put the strongest supported qualifications near the top. Skills lists and generic summaries cannot substitute for examples of use. An impressive detail that does not help establish relevant qualifications need not lead the resume.
+| Source or lesson | What we retain | Why and where we adapt |
+| --- | --- | --- |
+| Headless Headhunter guide and reviewed videos | Qualification-first selection; understandable work context; action, method, purpose/result | A nonspecialist should understand what the candidate did and why it mattered. Retain technical methods that establish engineering depth. |
+| Jake's LaTeX template | Consistent single-column sections, compact headings, projects, categorized skills, Unicode text mapping | Provides a reusable starting layout. A template or Unicode setting alone cannot prove ATS compatibility; inspect the actual PDF. |
+| Supplied Jake's Resume guide | Clear headings, action verbs, relevant keywords, readable bullets, useful outcomes, consistent presentation | Supports both human scanning and machine-readable information. Do not adopt its fixed skill counts, bullet quotas, one-line limit, unsupported hiring statistics, or claims of universally approved fonts. |
+| Main-resume revisions | One substantive page; required roles; project depth; omission checks | Over-simplification can remove the candidate's strongest evidence. Fill the page with useful facts rather than unrelated work or visual padding. |
+| Metrics corrections | User confirmations, attributed outcomes, explicit baselines and scope | Numbers can clarify value, but incorrect arithmetic or attribution damages credibility. Keep supported numbers even though sampled Headless videos discourage many software metrics. |
+| ATS and skills revisions | Categorized supported skills plus examples of actual use | Qualification-first prose can still omit literal searchable terms. Check terminology and text extraction alongside human readability; neither replaces evidence. |
+| Profile revisions | Shared facts, different lengths for different surfaces | Copying dense resume bullets everywhere can overwhelm LinkedIn and small portfolio cards. Preserve explicit domain terminology while shortening the presentation. |
 
-Write each bullet from evidence: action + relevant qualification/tool + how it was used + useful purpose or observed result, anchored to the listed experience. Do not force all elements into every sentence or inflate a weak experience to meet a bullet quota. The opening bullet should make the role understandable to a reader outside the candidate's specialty.
+These adaptations are independently authored design choices. They do not imply endorsement or that either source creator teaches every rule here.
 
-## Default presentation
+## Decide the deliverable
 
-Adapted from guide pages 14-24 and the supplied annotated template:
+- **Resume Experience Bank:** reusable detailed facts and alternative bullets; no page limit.
+- **Primary resume (base mode):** substantive application resume for the chosen role family, retaining useful technical breadth. A job posting is optional.
+- **Tailored resume:** posting-specific emphasis, skills, and project selection from the same bank.
 
-- Single column; Arial; black text; restrained blue contact links; no portrait or decorative charts.
-- Name 14 pt bold; contact 12 pt; body 10.5-11 pt; readable spacing, with 1.5 as the guide's body default.
-- Clear section headings; accurate job title, employer, location, and month/year dates. Reverse chronological work history; preserve internships as internships.
-- Education near the top when it is a screening requirement or relevant early-career strength. Use accurate degree and credential status; follow the user's preferences on graduation dates.
-- A simple opening bullet plus focused proof bullets per role. The guide suggests 3-8 total for work and at most 3 for projects; use fewer when evidence is limited. Do not pad.
-- No arbitrary one-page rule. Keep the document as concise as the evidence and target require. Reorder projects by relevance, without changing employment chronology.
-- A short contextual summary only when it clarifies a transition, actual relocation plan, or another relevant user-approved circumstance. Do not invent a moving date.
+"Master" can mean either a primary application resume or an exhaustive reference document. Clarify only when needed. Preserve the user's required roles and exclusions as candidate preferences, not rules for everyone. Default standard application resumes to one full, balanced page, with user-selected length and specialized CV/application formats taking precedence. Read [formatting.md](formatting.md) for fitting and verification.
 
-Respect requested templates, accessibility, local conventions, and specialized CV requirements. Academic, medical, legal, and federal formats can require a different structure. Dates for projects and a compact skills section are allowed when useful or requested. Keep truthful and relevant information even if a rigid template convention would hide it.
+## Write bullets that explain value
 
-## Explicit adaptations
+Use action + relevant method/qualification + context + useful purpose or observed outcome. Do not force every element into every bullet. The opening bullet should explain the application, service, or work to someone outside the specialty. A qualification can also be proven by another bullet; never force a separate bland summary that wastes space.
 
-These are design choices in this skill, not claims that the creator teaches them:
+Choose the strongest combination of product breadth, impact, technical depth, reliability, testing, teamwork, and delivery. A list of tiny features is usually weaker than a coherent account of the problem solved. Keep a small feature when it demonstrates a relevant skill or consequential design decision.
 
-- Guided intake, source reconciliation, evidence storage, and claim audits implement the user's requested interview workflow.
-- Verified metrics may remain when they clarify relevant scope or outcomes. The sampled videos discourage numbers for most software resumes; this adaptation does not make metrics mandatory or ban them categorically.
-- The guide's suggested 75% qualification coverage is a prioritization heuristic, not an application gate or hiring prediction. Do not fabricate a fit score.
-- Treat a required license, work authorization, degree, or experience threshold separately from a generic keyword count. Never conceal a disqualifying unknown behind a high overall count.
-- Do not repeat the guide's ATS sorting, interview ratios, economic predictions, or immigration statements as universal/current facts. They are unnecessary for this resume workflow.
-- Preserve respectful feedback. Diagnose the document, not the candidate, and avoid copying the videos' insults or blanket judgments.
+Fictional example:
 
-## Final audit
+- Thin: "Implemented wildcard search."
+- More useful, if confirmed: "Developed a Python metadata search tool that reduced manual file lookup from hours to seconds or minutes, using SQLite filters and Azure Blob Inventory."
+- Without timing evidence: "Developed a Python metadata search tool with SQLite filters so staff could locate files without inspecting storage containers individually."
 
-1. Every material claim maps to confirmed evidence, with personal ownership and intended versus observed outcomes preserved.
-2. Relevant qualifications appear in experience/project context; acronyms and job terminology are explicit only when accurate.
-3. Titles, dates, degree status, links, and metrics are internally consistent. Overlapping employment does not inflate years of experience.
-4. The top of the resume communicates the target role and strongest relevant evidence in a quick scan.
-5. Formatting is readable; no cut-off lines, tiny type, stranded headings, or confused reading order in the delivered format.
-6. Missing evidence and confirmation questions appear in the companion report, not disguised as resume facts.
+Do not transplant example facts into a candidate's resume. Use supported scope as scope, not an invented outcome. Reliability and data integrity can establish value even without a measured percentage.
+
+Check for buried delivery ownership: client requirements, application design, demonstrations, development, testing, deployment, training, and support. Name the stages the candidate actually performed. Do not infer delivery from code or Agile participation alone. Use the audience's accurate label (clients, staff, customers, or users).
+
+Use precise, varied verbs: **Developed/Built** for implementation, **Engineered** for substantial system work, **Designed** for design ownership, **Integrated** for connecting systems, **Implemented** for a concrete behavior, **Expanded** for extending an existing system, **Led** for actual leadership. Repetition is preferable to an inaccurate synonym; "architected," "spearheaded," and "optimized" require corresponding evidence. Use past tense for completed accomplishments, including completed work in a current role; present tense for ongoing duties. Bullet counts and line lengths follow evidence and page space, not fixed quotas.
+
+## Preserve technical breadth and ATS terminology
+
+For technical resumes, include a concise categorized skills section, unless the user chooses otherwise: languages; frameworks/tools; databases/cloud; relevant domains or methods. Adapt the categories to the candidate. Other professions may need licenses, equipment, systems, or professional methods instead.
+
+Audit against both the posting and the bank. Skills need confirmed evidence of use and a level the candidate can discuss; they need not all be repeated in bullets. Exclude skills the candidate declines or cannot substantiate. Do not turn a dependency, team stack, or employer technology into personal proficiency. Do not include every minor library or generic soft skill merely to increase keyword counts.
+
+Keep recognizable technology names and explicit domain terms when useful. For example, TensorFlow alone need not communicate **machine learning (ML)** to every reader. Actual retrieval work may support **retrieval-augmented generation (RAG)**, hybrid search, citations, or evaluation; an API call alone does not. Expand a relevant acronym once when space permits, then use the short form. Exact posting terminology is useful only when its meaning matches the work.
+
+Perform a literal terminology check separately from the evidence audit. Report supported terms present and relevant omissions. Do not describe a keyword count, PDF extraction result, or font choice as an ATS pass score. Treat degree, license, authorization, and experience thresholds separately from keyword coverage. Source guides' suggested coverage percentages are not application gates or interview probabilities.
+
+## Select experiences and projects
+
+Keep required core roles. Group consecutive positions at the same employer under one company heading, with distinct accurate role titles and month/year dates. Sort employers by latest relevant role, and roles within a group newest first; an overlapping short role at another employer can follow the continuous employer group. Do not double-count overlapping time, claim a promotion without confirmation, merge titles to inflate seniority, or switch to year-only dates to conceal a short contract. Unknown months remain unknown.
+
+Add a recognizable parent organization or a short domain descriptor when accurate and useful, without replacing the official employer or inventing an affiliation. Include unrelated work only when its contribution is useful for the target or the user explicitly requires it. Prefer relevant project detail to unrelated filler.
+
+Give new-grad projects meaningful space. Rank them by relevance, personal contribution, engineering depth, teamwork, validation, and demonstrated outcomes. Publication is one signal; a published shallow app need not outrank a substantial team simulation. Keep simulation, prototype, deployment, and validation status accurate. Choose a few major technologies for each header; use bullets to explain distinctive work.
+
+For each listed project include every available public destination: GitHub and live demo when both exist; product/site when the repository is private or unavailable; GitHub when no demo exists. Label links clearly (GitHub, Live Demo, Product Site), verify their destinations when accessible, and do not expose a private repository. Header contact links do not replace project-specific links.
+
+## Omission check and review
+
+Before approving a shortened draft, compare it with the prior resume and the bank. Check for lost outcomes, technical depth (such as concurrency, database work, reliability, security, or geospatial tooling), team contributions, client collaboration, and delivery/support. Restore relevant material or explain the tradeoff. Do not restore every fact indiscriminately; preserve the remainder in the bank.
+
+Use a simulated 10-20 second scan as a readability heuristic, not a claim about all recruiters. Verify titles, dates, ownership, metrics, stage, and links; then follow the export checks in [formatting.md](formatting.md). Keep unresolved questions outside the resume. If asked to rate the document, explain strengths and deductions for content, clarity, relevance, and formatting; label any score subjective. Do not predict interviews, rank a candidate's worth, or repeat source statistics and legal advice as current facts.

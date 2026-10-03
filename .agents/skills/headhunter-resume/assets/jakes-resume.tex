@@ -1,0 +1,138 @@
+% Resume template adapted from Jake Gutierrez's MIT-licensed resume template.
+% Upstream: https://github.com/jakegut/resume
+% MIT License
+% Copyright (c) 2020 Jake Gutierrez
+% Copyright (c) 2026 Khalifeh Basiri (adaptations)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% A separate upstream copy is also provided in JAKES_TEMPLATE_LICENSE.
+% TEMPLATE ONLY: bracketed prompts and example.com URLs are not candidate evidence.
+% Copy into candidate output, fill from confirmed facts, remove unused sections,
+% then compile, count pages, inspect rendering, and check extracted text and links.
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.5in}
+\addtolength{\textheight}{1in}
+\urlstyle{same}
+\raggedright
+\raggedbottom
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{\vspace{-3pt}\scshape\raggedright\large}{}{0em}{}[\titlerule\vspace{-4pt}]
+\newcommand{\resumeHeadingListStart}{\begin{itemize}[leftmargin=0.05in,label={},itemsep=3pt,parsep=0pt,partopsep=0pt,topsep=2pt]}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in,itemsep=2pt,parsep=0pt,partopsep=0pt,topsep=2pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+\newcommand{\resumeItem}[1]{\item {\fontsize{10.5}{12.4}\selectfont #1}}
+\newcommand{\resumeCompanyHeading}[2]{
+  \item\begin{tabularx}{\linewidth}{@{}Xr@{}}\textbf{#1} & #2\end{tabularx}\vspace{-4pt}
+}
+\newcommand{\resumeRoleHeading}[2]{
+  \item\begin{tabularx}{\linewidth}{@{}Xr@{}}\textit{#1} & \textit{#2}\end{tabularx}\vspace{-4pt}
+}
+\newcommand{\resumeEducationHeading}[4]{
+  \item\begin{tabularx}{\linewidth}{@{}Xr@{}}
+    \textbf{#1} & #2\\
+    \textit{#3} & \textit{#4}
+  \end{tabularx}\vspace{-4pt}
+}
+\newcommand{\resumeProjectHeading}[2]{
+  \item\begin{tabularx}{\linewidth}{@{}Xr@{}}#1 & #2\end{tabularx}\vspace{-4pt}
+}
+
+\begin{document}
+
+\begin{center}
+  \textbf{\LARGE [Full Name]}\\[3pt]
+  [City, Region] \textbar{} [Phone] \textbar{}
+  \href{mailto:name@example.com}{name@example.com}\\[2pt]
+  \href{https://example.com/linkedin}{LinkedIn} \textbar{}
+  \href{https://example.com/github}{GitHub} \textbar{}
+  \href{https://example.com/portfolio}{Portfolio}
+\end{center}
+
+% Move Education below Experience when that better reflects the candidate.
+\section{Education}
+\resumeHeadingListStart
+  \resumeEducationHeading{[Institution]}{[City, Region]}{[Degree and accurate status]}{[Graduation date]}
+\resumeHeadingListEnd
+
+\section{Experience}
+\resumeHeadingListStart
+  \resumeCompanyHeading{[Employer and accurate parent context if useful]}{[City, Region]}
+  \resumeRoleHeading{[Most recent title]}{[Mon YYYY -- Mon YYYY]}
+  \resumeItemListStart
+    \resumeItem{[Explain the work, personal contribution, major methods, and useful purpose or observed result.]}
+    \resumeItem{[Show a distinct supported outcome, technical decision, client collaboration, or delivery responsibility.]}
+  \resumeItemListEnd
+  % Keep distinct dates/titles for another consecutive role at this employer.
+  \resumeRoleHeading{[Earlier title at same employer]}{[Mon YYYY -- Mon YYYY]}
+  \resumeItemListStart
+    \resumeItem{[Describe relevant work and meaningful engineering depth without inventing metrics.]}
+  \resumeItemListEnd
+  \resumeCompanyHeading{[Other relevant employer]}{[City, Region]}
+  \resumeRoleHeading{[Accurate title]}{[Mon YYYY -- Mon YYYY]}
+  \resumeItemListStart
+    \resumeItem{[Explain supported contribution and value. Add or remove bullets according to evidence and page space.]}
+  \resumeItemListEnd
+\resumeHeadingListEnd
+
+\section{Projects}
+\resumeHeadingListStart
+  \resumeProjectHeading{\textbf{[Project Name]} \textbar{} [Major technologies]}{\href{https://example.com/repository}{GitHub} \textbar{} \href{https://example.com/demo}{Live Demo}}
+  \resumeItemListStart
+    \resumeItem{[Explain the product, personal contribution, distinctive methods, and accurate delivery/validation status.]}
+    \resumeItem{[Show relevant reliability, testing, team, AI, or other engineering work supported by evidence.]}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{[Project with private repository]} \textbar{} [Major technologies]}{\href{https://example.com/product}{Product Site}}
+  \resumeItemListStart
+    \resumeItem{[Describe the strongest relevant contribution. Do not expose private code or claim production use from a simulation.]}
+  \resumeItemListEnd
+\resumeHeadingListEnd
+
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.05in,label={},topsep=2pt]
+  \item {\fontsize{10.5}{12.4}\selectfont
+    \textbf{Languages:} [Supported languages]\\
+    \textbf{Frameworks and Tools:} [Supported frameworks and tools]\\
+    \textbf{Databases and Cloud:} [Supported database/cloud technologies]\\
+    \textbf{Domains and Methods:} [Supported relevant domains and methods]
+  }
+\end{itemize}
+
+\end{document}

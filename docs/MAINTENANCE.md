@@ -13,7 +13,23 @@ python scripts/build_portable_prompt.py
 python scripts/build_portable_prompt.py --check
 ```
 
-The prompt deliberately excludes executable Python source and OpenAI-specific UI metadata. Its compatibility preamble explains how to fall back when an AI host lacks files, browsing, code execution, or rendering. The test suite and package validator fail when the committed prompt is stale.
+The prompt deliberately excludes executable Python source and OpenAI-specific UI metadata. It includes the readable bank template, Jake-based LaTeX source, and upstream template license so single-file users can use the same assets. Its compatibility preamble explains how to fall back when an AI host lacks files, browsing, code execution, or rendering. The test suite and package validator fail when the committed prompt is stale.
+
+## Methodology and schema changes
+
+Keep source/adaptation reasons in the skill's `references/methodology.md`, provenance in `references/research.md`, and rights in `THIRD_PARTY_NOTICES.md`. Do not copy personal candidate rules into universal defaults. The page target defaults to one for standard applications; explicitly different deliverables retain their own requirements.
+
+Version-1 inventories remain supported. Optional preferences, public links, grouping, metrics, delivery status, and correction references are documented in `references/evidence.md`. Update validators, tests, the empty inventory, and documentation together when their structure changes. A confirmed correction retires its referenced prior claims from both draft audits and supported requirement mappings.
+
+Keep the upstream Jake MIT notice with the template and in the portable prompt. When copying the template into a standalone resume, preserve its embedded source comment notice. Compile a synthetic populated copy, inspect page count/rendering/text/links, and record actual results without committing candidate data or generated PDFs. A source-only check does not establish the finished document's quality.
+
+An optional reproducible local check is available when `pdflatex`, `pdfinfo`, `pdftotext`, and `pdftoppm` are on PATH:
+
+```sh
+python scripts/check_template.py
+```
+
+It populates the template with a fictional three-role/three-project sample under ignored `tmp/template-check/`, requires one page without overfull boxes, checks extracted ordering/common words/separators and embedded destinations, and renders a PNG. Inspect that PNG manually. This optional check is separate from dependency-free CI, installs no tools, and does not access live accounts or certify ATS parsing.
 
 ## Optional private source catalog
 

@@ -38,13 +38,32 @@ When file storage is available, the default layout is:
 ```text
 career-data/candidate-01/
   inventory.json
+  experience-bank.md
   draft-claims.json
   qualification-map.md
 output/
   resume.md
+  resume.tex              # when LaTeX is requested and supported
+  resume.pdf              # when compilation/export is available
 ```
 
 `inventory.json` holds career evidence, source IDs, experiences, target requirements, and open questions. `draft-claims.json` maps each factual resume statement to evidence IDs. The qualification map explains supported, partial, unknown, and absent qualifications.
+
+## Primary resume, tailored resume, and Experience Bank
+
+A primary resume is a substantive application document for a role family. A tailored resume changes emphasis and selection for a particular posting. Both default to one full, balanced page for standard applications; explicit length requests and specialized requirements override the default. The Resume Experience Bank is a detailed reusable reference without a page limit.
+
+You can ask: "Use AI to help me build a Resume Experience Bank from my old resumes, projects, and answers. Then build my one-page primary resume. Keep these core roles and exclude skills I cannot substantiate." The AI should ask a few useful questions and draft when enough evidence exists, rather than requiring a completed bank first. The [bank template](../.agents/skills/headhunter-resume/assets/experience-bank.md) is readable Markdown backed by the JSON evidence inventory.
+
+The [Jake-based LaTeX template](../.agents/skills/headhunter-resume/assets/jakes-resume.tex) is a starting point for new technical LaTeX resumes. Existing sources and user-selected templates are preserved for follow-up edits. The portable prompt includes the same template and license for hosts that cannot access repository files. Rendering and page-count verification still depend on the host's tools.
+
+Ask for an omission check if you want to compare the result with an older resume: the AI should identify meaningful evidence lost during shortening. A formatted result is verified only after the actual output's page count, rendering, extracted text, and links have been checked to the extent tools allow. These checks do not certify every ATS.
+
+## Corrections and profile alignment
+
+Tell the AI when a metric is confirmed or invalidated. Confirmations should close answered questions. Corrections should update both bank formats and mark invalidated facts rejected; optional `supersedes` references prevent stale evidence from supporting a later draft. The schema extensions are documented in the [evidence reference](../.agents/skills/headhunter-resume/references/evidence.md) and remain compatible with existing version-1 inventories.
+
+You can also request exact LinkedIn and portfolio replacement copy. Facts should agree across surfaces, while LinkedIn highlights and small project cards can be shorter than resume bullets. Supported domain terms such as machine learning or RAG remain explicit when relevant. Reviewable copy does not imply permission to publish it.
 
 If the host has no persistent files, ask it to return the inventory as a JSON code block and save that text yourself. Upload or paste it in a later chat to continue. No model should claim durable hidden memory as a substitute for saved evidence.
 

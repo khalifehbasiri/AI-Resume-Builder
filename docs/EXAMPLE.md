@@ -39,4 +39,4 @@ The resume section does not claim measured improvements, real users, production 
 
 The candidate can reuse the evidence bank for a role requiring Python, SQL, and testing. A role requiring AWS would trigger a targeted question about other AWS experience, not an automatic addition to the resume.
 
-Return to the [installation instructions](../README.md#install) or [usage guide](USAGE.md).
+Return to the [installation instructions](../README.md#install-the-full-agent-skills-package) or [usage guide](USAGE.md).

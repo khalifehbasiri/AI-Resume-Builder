@@ -12,10 +12,15 @@ RESOURCES = (
     ("Core workflow", SKILL / "SKILL.md"),
     ("Interview guidance", SKILL / "references" / "interview.md"),
     ("Resume methodology", SKILL / "references" / "methodology.md"),
+    ("Formatting and export checks", SKILL / "references" / "formatting.md"),
+    ("Profile alignment", SKILL / "references" / "profile-alignment.md"),
     ("Career-source guidance", SKILL / "references" / "sources.md"),
     ("Evidence-bank schema", SKILL / "references" / "evidence.md"),
     ("Research notes", SKILL / "references" / "research.md"),
     ("Empty inventory template", SKILL / "assets" / "inventory.json"),
+    ("Readable experience-bank template", SKILL / "assets" / "experience-bank.md"),
+    ("Jake-based LaTeX template", SKILL / "assets" / "jakes-resume.tex"),
+    ("Jake template license", SKILL / "assets" / "JAKES_TEMPLATE_LICENSE"),
 )
 
 HEADER = """# Headhunter Resume — portable AI instructions
@@ -25,6 +30,7 @@ This file is the single-file, vendor-neutral edition of the Headhunter Resume sk
 Source: https://github.com/khalifehbasiri/AI-Resume-Builder
 
 Original project material is released under the MIT License. Linked third-party source material remains the property of its respective owners; see the repository's `THIRD_PARTY_NOTICES.md`.
+The included Jake-based LaTeX template is separately attributed under its upstream MIT License, reproduced below. Resume and bank placeholders are template prompts, not evidence about a candidate.
 
 ## Instructions to the AI
 
