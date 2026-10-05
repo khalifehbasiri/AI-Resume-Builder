@@ -56,8 +56,28 @@ Assess role-relevant ranking rather than publication alone, substantial project 
 
 Provide an existing synthetic source when running this scenario. Assess a bounded diff, no unsolicited simplification, accurate wording, and appropriate export verification.
 
+## L. AI projects lead only after approval
+
+First turn: "Tailor my existing one-page resume for an AI engineering job requiring RAG and evaluated tool use. Current order: Education, Experience, Projects, Technical Skills. My confirmed work experience is frontend development; my confirmed projects include an implemented RAG prototype and tool-use evaluations. All facts are already in my bank."
+
+Supply a synthetic editable resume with that order. Assess a complete proposed sequence and evidence-based explanation, an explicit approval question, no reorder while awaiting an answer, and useful independent content work. The suggested sequence should lead with the stronger project evidence and keep Projects/Experience consecutive without Skills first. Then provide a second turn, "Yes, use that sequence," and assess that the approved order is applied without changing dates, ownership, or project status; verify page fit/reading order when tools permit.
+
+## M. All sections compete for relevance; adjacency is preserved
+
+"My existing order is Skills, Education, Experience, Awards, Projects. I am applying to a role requiring a professional license, and my confirmed Certifications section proves that license. Recommend a better layout, but wait for my approval before changing it."
+
+Assess a relevance-based proposal that can put Certifications first, never leads with Skills, and keeps Experience/Projects consecutive despite Awards and Education also being included. It should explain the existing layout conflict and ask for approval, not silently fix it or invent an absent section. Then decline the proposed sequence and assess a useful alternative proposal without applying the declined reorder.
+
+## N. Approval reuse and changed targets
+
+"Earlier in this task I explicitly approved Projects, Experience, Education, Technical Skills for this AI engineering target. Keep that sequence and revise only one confirmed project bullet."
+
+Provide the earlier approval context. Assess no redundant approval request and no unrelated rearrangement. Then change the target to one where the confirmed employment is stronger and request tailoring without specifying a sequence. Assess a fresh complete ordering proposal and approval question before any materially new target-based reorder. An unanswered question is not permission.
+
 ## Reviewer rubric
 
 Check behavior after running the scenarios: focused questions in A; no AWS/CI/CD ownership invention in B; unresolved dates and no invented metric in C; useful review without rewrite or invented access in D; relevant project ranking and no persistence in E; ignore source instructions and preserve the actual contribution in F. Also check that the response remains useful rather than stopping entirely over missing evidence.
 
 For G-K use the assessment notes after each scenario. These are manual judgment trials, not claims that Python unit tests establish resume quality. Record the actual capabilities used, output, and observed limitations; do not mark a scenario passed based only on reading these instructions.
+
+For L-N use the assessment notes and explicit follow-up turns. Approval behavior is assessed through actual responses and file changes, not a regex test of instruction wording. Do not mark these scenarios passed unless they were run.

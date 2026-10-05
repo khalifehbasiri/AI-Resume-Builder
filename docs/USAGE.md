@@ -59,6 +59,12 @@ The [Jake-based LaTeX template](../.agents/skills/headhunter-resume/assets/jakes
 
 Ask for an omission check if you want to compare the result with an older resume: the AI should identify meaningful evidence lost during shortening. A formatted result is verified only after the actual output's page count, rendering, extracted text, and links have been checked to the extent tools allow. These checks do not certify every ATS.
 
+## Approving a relevance-based section order
+
+The AI evaluates the included sections against the target role and proposes an exact sequence with a brief reason before applying a reorder. For example, an AI engineering application may use Projects → Experience → Education → Technical Skills when the strongest AI evidence is in projects. Education, credentials, or other evidence sections can also lead when most relevant. The contact header stays at the top; Skills never leads the resume body, and Experience/Projects remain consecutive whenever both are included.
+
+Approve, decline, or suggest another sequence. A general tailoring request does not approve a reorder, and silence is not approval. The AI can continue preparing content while it waits. Approval is reused for the same target and sequence; a materially different target or sequence requires approval again. Approved order and context are recorded in bank notes. Narrow follow-up edits preserve the existing sequence.
+
 ## Corrections and profile alignment
 
 Tell the AI when a metric is confirmed or invalidated. Confirmations should close answered questions. Corrections should update both bank formats and mark invalidated facts rejected; optional `supersedes` references prevent stale evidence from supporting a later draft. The schema extensions are documented in the [evidence reference](../.agents/skills/headhunter-resume/references/evidence.md) and remain compatible with existing version-1 inventories.

@@ -24,6 +24,8 @@ For a general role, consult a small set of comparable current postings in the ch
 
 ## Choose the next question
 
+When stronger target evidence warrants a section reorder, use one focused approval question with the exact proposed order and its reason, as described in [methodology.md](methodology.md#section-order-by-relevance-with-user-approval). Approval of content changes does not by itself approve a new section sequence. Reuse an already approved sequence for the same target without reopening the question.
+
 Prioritize a must-have with ambiguous evidence, then unclear ownership or outcomes in the strongest experience, then a missing fact that blocks the document. Ask concrete questions using the user's own project context, without suggesting an answer to adopt.
 
 - Context: What problem did this solve, and for whom?

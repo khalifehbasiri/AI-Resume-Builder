@@ -13,6 +13,7 @@ This is a reusable factual reference, not an application resume. Replace placeho
 - Required core roles (experience IDs):
 - Excluded skills or claims:
 - Other confirmed presentation choices:
+- Approved section order, target, and approval date/answer locator (do not apply an unapproved proposal):
 
 ## Sources
 

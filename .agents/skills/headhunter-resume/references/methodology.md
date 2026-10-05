@@ -13,6 +13,7 @@ Use the candidate's request, truthful evidence, and the actual application requi
 | Metrics corrections | User confirmations, attributed outcomes, explicit baselines and scope | Numbers can clarify value, but incorrect arithmetic or attribution damages credibility. Keep supported numbers even though sampled Headless videos discourage many software metrics. |
 | ATS and skills revisions | Categorized supported skills plus examples of actual use | Qualification-first prose can still omit literal searchable terms. Check terminology and text extraction alongside human readability; neither replaces evidence. |
 | Profile revisions | Shared facts, different lengths for different surfaces | Copying dense resume bullets everywhere can overwhelm LinkedIn and small portfolio cards. Preserve explicit domain terminology while shortening the presentation. |
+| Relevance-based section order | Put the strongest supported qualifications earlier, with user approval; never Skills first; keep Experience and Projects adjacent | The strongest evidence may be a project, degree, credential, or employment. A fixed education-first or experience-first layout can bury it. Approval preserves the candidate's layout choice; adjacent work/project sections keep their evidence easy to compare. |
 
 These adaptations are independently authored design choices. They do not imply endorsement or that either source creator teaches every rule here.
 
@@ -23,6 +24,27 @@ These adaptations are independently authored design choices. They do not imply e
 - **Tailored resume:** posting-specific emphasis, skills, and project selection from the same bank.
 
 "Master" can mean either a primary application resume or an exhaustive reference document. Clarify only when needed. Preserve the user's required roles and exclusions as candidate preferences, not rules for everyone. Default standard application resumes to one full, balanced page, with user-selected length and specialized CV/application formats taking precedence. Read [formatting.md](formatting.md) for fitting and verification.
+
+## Section order by relevance, with user approval
+
+Evaluate every included section against the actual posting or chosen role family, using confirmed evidence and important screening requirements. Education, credentials, publications, and other substantive sections may lead when they provide the strongest relevant proof; neither Education nor Experience automatically belongs first. A generic summary should not displace stronger evidence. Do not rank a section first merely because its title or skills list repeats keywords.
+
+Keep the name/contact header at the top. **Skills or Technical Skills must never be the first resume-body section.** Treat Experience and Projects as one consecutive block whenever both are included. Choose their internal order by which demonstrates the target qualifications better, then place that block among the other sections by relevance. Adjacency means consecutive vertical sections in the single-column document, not side-by-side columns. Do not put Education, Skills, a summary, or any other section between Experience and Projects. Do not invent an empty section when one is absent.
+
+Before applying this ordering to a new or existing resume, show the complete proposed sequence and a brief evidence-based reason, then explicitly ask for approval. For example: "For this AI engineering role, your RAG project demonstrates the required AI work more directly than your employment. I recommend Projects → Experience → Education → Technical Skills. May I use this order?" This is a reviewable proposal; a general request to improve or tailor the resume is not approval for the sequence.
+
+Apply only after the user approves. An explicit user request for that exact sequence, or an earlier approval for the same target and sequence, already provides authorization; do not ask again. A materially different sequence or target requires a fresh proposal and approval. Record the approved order, target, and approval locator in the candidate's bank notes so reuse remains scoped.
+
+If approval is pending, continue evidence gathering and bullet work without applying the proposed reorder. If the user declines, retain the existing valid order or agreed template default and offer another compliant sequence if useful. If the existing order starts with Skills or separates Experience and Projects, explain the conflict and seek approval for a compliant order rather than silently moving sections. Do not interpret silence as approval. Narrow bullet edits do not trigger an unsolicited reorder.
+
+Illustrative approved orders, excluding the contact header:
+
+- AI projects provide stronger relevant evidence: **Projects → Experience → Education → Technical Skills**.
+- Employment provides stronger relevant evidence: **Experience → Projects → Education → Technical Skills**.
+- Education is the strongest relevant credential: **Education → Experience → Projects → Technical Skills**.
+- A required professional credential is strongest: **Certifications → Education → Projects → Experience → Skills**.
+
+These are examples, not fixed templates. Preserve accurate chronology inside Experience and relevant project ranking inside Projects. After an approved reorder, recheck page fit, reading order, and that the rendered section sequence matches the approved one.
 
 ## Write bullets that explain value
 

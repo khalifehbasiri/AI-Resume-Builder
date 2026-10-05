@@ -37,6 +37,8 @@ Stop interviewing when enough relevant evidence exists to produce the requested 
 
 ## Write and verify
 
+Before applying a relevance-based section order, propose the exact sequence and explain which supported qualifications justify it, then ask for the user's approval. Follow [methodology.md](references/methodology.md#section-order-by-relevance-with-user-approval). Never lead the resume body with Skills or Technical Skills. When both Experience and Projects are present, keep them consecutive in either order, with no other section between them. Reuse explicit approval for the same target and sequence; a generic request to tailor a resume is not approval to reorder it. Continue independent content work while approval is pending.
+
 Make the first bullet explain the work in plain language. Connect qualifications to action, method, context, and useful purpose or observed result. Preserve meaningful technical depth, client collaboration, delivery, testing, and support rather than shortening mechanically. Keep the user's required core roles; group consecutive roles under the same employer with distinct titles and dates. Rank projects by relevance, contribution, and engineering depth. Include all available public destinations for each listed project. For technical resumes, include a categorized, evidence-backed skills section alongside proof in bullets.
 
 Follow [methodology.md](references/methodology.md) for writing and [formatting.md](references/formatting.md) before formatted output or layout review. The bundled [Jake-based template](assets/jakes-resume.tex) is the default for new technical LaTeX resumes; preserve an existing or user-chosen template. Preserve accurate titles and dates. Expand domain terms and add literal job terms only when supported.

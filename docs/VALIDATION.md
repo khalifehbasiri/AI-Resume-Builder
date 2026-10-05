@@ -1,6 +1,6 @@
 # Validation record
 
-Latest local verification performed on Windows with Python 3.11 on 2026-10-03.
+Latest package/instruction verification performed on Windows with Python 3.11 on 2026-10-05. Template rendering was last verified on 2026-10-03 as recorded below.
 
 ## Automated checks
 
@@ -12,6 +12,12 @@ Latest local verification performed on Windows with Python 3.11 on 2026-10-03.
 - Public-release tests use synthetic catalog data. No third-party catalog is shipped; the search helper requires an explicit local `--catalog` path. Initial private research indexed 1,140 role/episode entries and 132 qualification profiles, with 991 recovered links; those source records are not part of the public package.
 
 Two issues were found and fixed: Windows newline differences in imported multiline qualification text, and overly strict title/employer validation for incomplete intake. Regression tests cover both. The catalog builder also rejects an enclosing Google Sheets HTML page that has no table rows, preventing silent loss of hyperlinks.
+
+## Section-order update on 2026-10-05
+
+The canonical skill, methodology, interview/formatting references, bank/template guidance, and generated portable prompt now specify relevance-based section ordering with explicit approval before application. Skills must not lead the resume body; Experience and Projects must be consecutive in either order whenever both are present. The methodology records the reason for the rule and scopes approval reuse to the same target and sequence.
+
+The unchanged 33-test suite passed, along with the package validator, portable-prompt freshness check, and skill-creator validator. Synthetic scenarios L-N were added for pending/accepted/declined approval, credential-first ordering, adjacency, approval reuse, and changed targets. They are prepared manual behavioral trials, not a claim of fresh independent model evaluation. This update changes only guidance and template comments; no rendered template content or helper behavior changed.
 
 ## Template verification on 2026-10-03
 

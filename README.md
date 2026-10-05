@@ -11,6 +11,7 @@ Combines the Headless Headhunter's qualification-first approach with a Jake-base
 - **One full, balanced page** for standard application resumes by default, with meaningful work and project details rather than unrelated filler. User-selected length and specialized application requirements take precedence.
 - **Separate primary resumes, tailored resumes, and the Resume Experience Bank.** A primary resume preserves useful breadth for a role family; the bank retains deeper facts without a page limit.
 - **Qualifications and ATS visibility together.** Explain what the candidate did and why it mattered, while keeping supported skills and recognizable domain terms easy to find. A keyword check is not an ATS pass score.
+- **Relevant evidence first, with your approval.** The AI proposes an exact section order and explains why it fits the target before applying it. Skills never leads the resume body, and Experience and Projects stay consecutive in either order when both are present.
 - **Preserve value when shortening.** Check for lost outcomes, technical depth, client collaboration, delivery, testing, and support before accepting a simplified draft.
 - **Record confirmations and corrections.** Reuse answered questions, preserve metric attribution, and prevent corrected claims from returning in later drafts.
 - **Consistent facts across surfaces.** Requested LinkedIn and portfolio suggestions use shorter, surface-appropriate copy without changing dates, outcomes, or project status.

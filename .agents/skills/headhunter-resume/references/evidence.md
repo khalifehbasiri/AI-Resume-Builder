@@ -21,6 +21,8 @@ The version-1 inventory contains:
 - `open_questions`: remaining questions as strings. Record skipped questions in `notes` to avoid repetition.
 - `notes`: candidate context, unresolved source conflicts, and revisions.
 
+Record an approved section sequence with its target and approval source/answer locator in `notes`. Proposed or declined orders are not approvals. Reuse approval only for the same target and sequence; the approval workflow and layout constraints are defined in [methodology.md](methodology.md#section-order-by-relevance-with-user-approval). No schema change is required to retain this context.
+
 Claim status is `confirmed`, `unconfirmed`, `conflict`, or `rejected`. Ownership is `personal`, `team`, or `unknown`. `confirmed` means explicitly attested by the candidate or directly established with appropriate attribution; it does not mean independently background-checked. Team ownership may support a scoped team claim, never "I built everything". Unknown ownership cannot support a final resume claim until clarified. Never delete conflicting history just to pass validation.
 
 Version 1 also accepts these optional extensions; older inventories remain valid:
